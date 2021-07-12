@@ -1,5 +1,5 @@
 // import { greet } from "./utils/greet";
-import episodes from "./episodes.json"
+import episodes from "./episodes2.json"
 import Episode from "./components/Episode"
 
 function App(): JSX.Element {
@@ -7,10 +7,11 @@ function App(): JSX.Element {
   return (
     <>
       {episodeArray.map(ep=><Episode
+      key={ep.name}
       name={ep.name}
       season={ep.season}
       number={ep.number}
-      image={ep.image.medium}
+      image={ep.image}
       summary={ep.summary}
       url={ep.url}
       />)}

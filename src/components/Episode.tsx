@@ -1,3 +1,6 @@
+import {upCase, makeEpisodeCode} from "../utils/episodeUtils";
+
+
 interface IEpisode {
     // id: number;
     url: string;
@@ -20,13 +23,13 @@ interface IEpisode {
   function Episode(props: IEpisode): JSX.Element {
     return (
       <section>
-          <h1>{props.name} {"-"} {props.season}{props.number}</h1>
+          <h1>{props.name} {"-"} {makeEpisodeCode(props.season,props.number)}</h1>
           <img src={props.image.medium} alt= "Episode Artwork" />
           <p>
               Summary: {props.summary}
           </p>
           <p>
-          (<a href={props.url}>Source Link</a>)
+          (<a href={props.url}>TVMaze.com</a>)
           </p>
       </section>
     );
