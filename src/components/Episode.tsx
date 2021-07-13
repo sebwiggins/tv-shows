@@ -1,4 +1,4 @@
-import {upCase, makeEpisodeCode} from "../utils/episodeUtils";
+import {makeEpisodeCode, replaceText} from "../utils/episodeUtils";
 
 
 interface IEpisode {
@@ -26,10 +26,10 @@ interface IEpisode {
           <h1>{props.name} {"-"} {makeEpisodeCode(props.season,props.number)}</h1>
           <img src={props.image.medium} alt= "Episode Artwork" />
           <p>
-              Summary: {props.summary}
+              Summary: {replaceText(props.summary)}
           </p>
           <p>
-          (<a href={props.url}>TVMaze.com</a>)
+          (<a href={props.url}>TVMaze</a>)
           </p>
       </section>
     );
