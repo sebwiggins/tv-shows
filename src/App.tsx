@@ -1,56 +1,69 @@
 // import { greet } from "./utils/greet";
-import episodes from "./episodes2.json"
-import Episode from "./components/Episode"
-import {useState} from 'react'
+import episodes from "./episodes2.json";
+import Episode from "./components/Episode";
+import { useState } from "react";
 
 function App(): JSX.Element {
-  const [searchTerm, setSearchTerm] = useState("")
- 
-  const filteredEpisodes = episodes.filter((val) => 
-  val.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ||val.summary.toLowerCase().includes(searchTerm.toLowerCase()))
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const [dropbar, setDropbar] = useState("")
+  const filteredEpisodes = episodes.filter(
+    (val) =>
+      val.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      val.summary.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const dropdown = episodes.filter((ep)=>ep.name === dropbar)
+  const [dropbar, setDropbar] = useState("");
 
-  function dropOrFilter () {
-    if (dropbar === ""){
-      return filteredEpisodes
+  const dropdown = episodes.filter((ep) => ep.name === dropbar);
+
+  function dropOrFilter() {
+    if (dropbar === "") {
+      return filteredEpisodes;
+    } else {
+      return dropdown;
     }
-    else{
-      return dropdown
-    } 
   }
 
   return (
     <>
-    <div>
-     <input type="text" 
-     placeholder="Search..." 
-     onChange={(event) => 
-     {setSearchTerm(event.target.value)}}/>
-     <p>Showing {filteredEpisodes.length}/{episodes.length} episodes</p>
-    </div>
+      <div>
+        <input
+          type="text"
+          placeholder="Search..."
+          onChange={(event) => {
+            setSearchTerm(event.target.value);
+          }}
+        />
+        <p>
+          Showing {filteredEpisodes.length}/{episodes.length} episodes
+        </p>
+      </div>
 
-    <label htmlFor="Episodes">Choose an episode:</label>
-    <select name="Episodes" 
-    id="Episodes"
-    onChange={(event) => 
-      {setDropbar(event.target.value)}}>
+      <label htmlFor="Episodes">Choose an episode:</label>
+      <select
+        name="Episodes"
+        id="Episodes"
+        onChange={(event) => {
+          setDropbar(event.target.value);
+        }}
+      >
         <option value="">...</option>
-      {episodes.map(ep=><option key={ep.name}>{ep.name}</option>)}
-    </select>
+        {episodes.map((ep) => (
+          <option key={ep.name}>{ep.name}</option>
+        ))}
+      </select>
 
-    {dropOrFilter().map(ep=><Episode
-    key={ep.name}
-    name={ep.name}
-    season={ep.season}
-    number={ep.number}
-    image={ep.image}
-    summary={ep.summary}
-    url={ep.url}
-    />)}
+      {dropOrFilter().map((ep) => (
+        <Episode
+          key={ep.name}
+          name={ep.name}
+          season={ep.season}
+          number={ep.number}
+          image={ep.image}
+          summary={ep.summary}
+          url={ep.url}
+        />
+      ))}
     </>
   );
 }
