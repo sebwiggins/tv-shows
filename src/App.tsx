@@ -10,6 +10,19 @@ function App(): JSX.Element {
   val.name.toLowerCase().includes(searchTerm.toLowerCase())
   ||val.summary.toLowerCase().includes(searchTerm.toLowerCase()))
 
+  const [dropbar, setDropbar] = useState("")
+
+  const dropdown = episodes.filter((ep)=>ep.name === dropbar)
+
+  function dropOrFilter () {
+    if (dropbar === ""){
+      return filteredEpisodes
+    }
+    else{
+      return dropdown
+    } 
+  }
+
   return (
     <>
     <div>
@@ -20,7 +33,16 @@ function App(): JSX.Element {
      <p>Showing {filteredEpisodes.length}/{episodes.length} episodes</p>
     </div>
 
-    {filteredEpisodes.map(ep=><Episode
+    <label htmlFor="Episodes">Choose an episode:</label>
+    <select name="Episodes" 
+    id="Episodes"
+    onChange={(event) => 
+      {setDropbar(event.target.value)}}>
+        <option value="">...</option>
+      {episodes.map(ep=><option key={ep.name}>{ep.name}</option>)}
+    </select>
+
+    {dropOrFilter().map(ep=><Episode
     key={ep.name}
     name={ep.name}
     season={ep.season}
