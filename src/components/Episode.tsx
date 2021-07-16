@@ -1,6 +1,6 @@
 import { makeEpisodeCode, replaceText } from "../utils/episodeUtils";
 
-interface IEpisode {
+export interface IEpisode {
   // id: number;
   url: string;
   name: string;
