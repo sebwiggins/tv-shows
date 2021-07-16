@@ -1,29 +1,28 @@
 // import { greet } from "./utils/greet";
 // import episodes from "./episodes2.json";
 import Episode from "./components/Episode";
-import {IEpisode} from "./components/Episode";
+import { IEpisode } from "./components/Episode";
 import { useEffect, useState } from "react";
 
 function App(): JSX.Element {
-
   const [episodes, setEpisode] = useState<IEpisode[]>([]);
 
   useEffect(() => {
-  const handleGetEpisode = async () => {
-    const response = await fetch(
-      "https://api.tvmaze.com/shows/38963/episodes"
+    const handleGetEpisode = async () => {
+      const response = await fetch(
+        "https://api.tvmaze.com/shows/38963/episodes"
       );
-    const jsonBody: IEpisode[] = await response.json();
-    setEpisode(jsonBody);
-  };
-  handleGetEpisode();
+      const jsonBody: IEpisode[] = await response.json();
+      setEpisode(jsonBody);
+    };
+    handleGetEpisode();
   }, []);
 
   const [searchTerm, setSearchTerm] = useState("");
 
   function getFilteredEpisodes() {
     if (episodes === undefined) {
-      return []
+      return [];
     } else {
       return episodes.filter(
         (val) =>
@@ -37,12 +36,11 @@ function App(): JSX.Element {
 
   function getDropdownEpisodes() {
     if (episodes === undefined) {
-      return []
+      return [];
     } else {
       return episodes.filter((ep) => ep.name === dropbar);
     }
   }
-  
 
   function dropOrFilter() {
     if (dropbar === "") {
